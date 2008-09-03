@@ -21,6 +21,10 @@ module Uberkit
         classes << "last" if @actions.last == [contents, options, url_for_options]
         classes << "current" if merits_current?(contents,options,url_for_options)
         classes << "disabled" if options.delete(:disabled)    
+        if options.include?(:additional)
+          classes << options[:additional]
+          options.delete(:additional)
+        end
         classes << classes.join("_") if classes.size > 1
         content_tag(:li, contents, :class => classes.join(" "))
       end
